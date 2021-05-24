@@ -2,21 +2,76 @@ _format_version: "2.1"
 
 services:
   - name: user-service
-    url: http://host.docker.internal:3001/user
+    url: https://host.docker.internal:3001/user
     routes:
       - name: user-route
         paths:
           - /user
-  - name: hello-service
-    url: http://host.docker.internal:8002
-    routes:
-      - name: hello-route
-        paths:
-          - /hello
 
-plugins:
-  - name: rate-limiting
-    service: hello-service
-    config:
-      minute: 5
-      policy: local
+  - name: salary-service
+    url: https://host.docker.internal:3002/salary
+    routes:
+      - name: salary-route
+        paths:
+          - /salary
+
+certificates:
+  - cert: |-
+      -----BEGIN CERTIFICATE-----
+        MIIEfzCCAuegAwIBAgIQNq85LDoRk1KcLhyafQb6VTANBgkqhkiG9w0BAQsFADCB
+        qzEeMBwGA1UEChMVbWtjZXJ0IGRldmVsb3BtZW50IENBMUAwPgYDVQQLDDdERVNL
+        VE9QLTAyOU1IM1ZcbHVjaWFAREVTS1RPUC0wMjlNSDNWIChsdWNpYW5vIGFsdmFy
+        ZXopMUcwRQYDVQQDDD5ta2NlcnQgREVTS1RPUC0wMjlNSDNWXGx1Y2lhQERFU0tU
+        T1AtMDI5TUgzViAobHVjaWFubyBhbHZhcmV6KTAeFw0yMTA1MjQxOTMyMzJaFw0y
+        MzA4MjQxOTMyMzJaMGsxJzAlBgNVBAoTHm1rY2VydCBkZXZlbG9wbWVudCBjZXJ0
+        aWZpY2F0ZTFAMD4GA1UECww3REVTS1RPUC0wMjlNSDNWXGx1Y2lhQERFU0tUT1At
+        MDI5TUgzViAobHVjaWFubyBhbHZhcmV6KTCCASIwDQYJKoZIhvcNAQEBBQADggEP
+        ADCCAQoCggEBAKzKc2iaNT+3rNx9JehLCwJJUC8WwWwwlU/6V2lOYHLh+DkqEltr
+        2m1GZhpVKMxkQX5vD1UCHG4BkCjR+5HiJQdA7r6G/T/qyXYUolnM6KsUxeT9gqFI
+        N4NBJUrwCHM7yf9w+/cMEPsN6qiSXtCZqeMC32eJeKP0gjHX730U360AqmhAR/Kh
+        CgFgRViokscO5AZIyLig1Zo1L5bPtoJuP4Fx8LbQ8hMrzGfqe/sjGfrRtrWpr8M/
+        1Efd4NDLvG9pckl4JVYW2nSf7MKJtQsFZfTSK9ROcP9C39perMZI/Jo+9cETD6t8
+        Gpz0ZZoiXxDVOPW3RRqLcCL41ixnrqeU+HcCAwEAAaNeMFwwDgYDVR0PAQH/BAQD
+        AgWgMBMGA1UdJQQMMAoGCCsGAQUFBwMBMB8GA1UdIwQYMBaAFOOdz4q+5v2IHp4/
+        2WAfG69WeoeTMBQGA1UdEQQNMAuCCWxvY2FsaG9zdDANBgkqhkiG9w0BAQsFAAOC
+        AYEAAbT0pVBR6PuwktMaZAtq8pzwcURRmDBVyyLl0QBVbwxuer7oAQPEKr8P0uVq
+        uwpcBgksZ2wiNLLfSdW9tU55tbVq0IRHFWQCcOsUm5O14n8YTJU8B/OaRchmYC7O
+        or9zClNgW0ichTrlkkzNO1zrPDjo4WiSTWyzKHmRiyxS5B6aK9kN96jMrQj1B+kA
+        3Yv1/M+WQZvp9TuPvk5CJlnv0jUja/8/ecoMaLfVDThC8xdTfELm5etvQ/ppqUfA
+        lI3byDioIcWu3bJW58e22puvBQOjbbnU32smOJzo57Q8qES3btMD8vBmpR/Z3PqT
+        tcbCMF5wMIchPeCgopLkuj+u+cPT5Xl6rSBjXGK5DapPBZfidFzPLowqEJzC6TPc
+        SVAgt/0I4F/DtFg52t9p/0QDMcul4wo5oJcvuzt/9vPRnRVf76mEF3xe/5iSKy9J
+        IOIuKDGt3ZX5ogR80szVFk5rYyecrveaEmfsu5zzpCWSH0LN8Uat/ECsJaR1991X
+        MChi
+      -----END CERTIFICATE-----
+    key: |-
+      -----BEGIN PRIVATE KEY-----
+        MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCsynNomjU/t6zc
+        fSXoSwsCSVAvFsFsMJVP+ldpTmBy4fg5KhJba9ptRmYaVSjMZEF+bw9VAhxuAZAo
+        0fuR4iUHQO6+hv0/6sl2FKJZzOirFMXk/YKhSDeDQSVK8AhzO8n/cPv3DBD7Deqo
+        kl7QmanjAt9niXij9IIx1+99FN+tAKpoQEfyoQoBYEVYqJLHDuQGSMi4oNWaNS+W
+        z7aCbj+BcfC20PITK8xn6nv7Ixn60ba1qa/DP9RH3eDQy7xvaXJJeCVWFtp0n+zC
+        ibULBWX00ivUTnD/Qt/aXqzGSPyaPvXBEw+rfBqc9GWaIl8Q1Tj1t0Uai3Ai+NYs
+        Z66nlPh3AgMBAAECggEANTyrEi9w+JC+0bA9XbTBT5MHAXshXRQa7OlUxT1AuiSl
+        NfegcEpqogButO5IA7Ff/HR7ZNWhrMMOh4Uq3WevwOxgopM0s9zC9X6mBsT7arqb
+        vlHdTZPShr4rn0sVT2u8cNd+yj8NfExtYEK4s8ykay0XZ+8THHDZLEI7p24m/EYW
+        hZoH8L8a6LTx9enBhaUY7NWlcZnDI1wHzHaT6oAs+NmqzrbDP2vNUrl5vgZi//t4
+        +53KoMo8z+/s2LAvmSa42PnkdXBXkUTntrld7K3Qu1DsXeYxyQekl7Z+Q3nZeg8f
+        X7PcDO9ozs/qA0vZtod06UTFg14pI0V16wnnmEkxAQKBgQDJ+J6fLK0plqLl6D1/
+        vlaZZlgvZpVwft9GH13zkWhv5EanHUVtB3/qcBXFsfopZ6H1PKj6j58isgMYk/uh
+        Ypnb/Htbo/vHTwy07aqsSgVfAPAH0lvjBXzRbwEPRIc4MpyCTksZpEy9BfPlux97
+        oUa2zClRvpA2qVmuypUdcNgRIwKBgQDbA4EH+jME1NVghMIA/N7aBF64D+y0QXuA
+        R/9ZCev0N0C+Vi2S9somJS8GuSIHnpDO+VKUw2N2bR9jG5UsYIJGYXDaIqDK6Sty
+        TvmMiA1ywSYzpGZjLwEd2CgwctiGfDdtlJ3SUODJ74m4BUat2j4IpPgO2BSgGbCv
+        fWmot4oSnQKBgArvJsc/R/CkcxU3SX0M9OtBGy0VxKledP/62r9A9AJ6vUh20Tdh
+        3I74mnUleYGcVqxMKGnINLlQIdLG0Cygheve8162tf7ITMvOwhqptzi5eEU0Ij1c
+        IrHD7K7C6v8j3k0/p9kvh+gD1nxtcPrkdEuZKfN++Ze7+1r3JLN/VHM5AoGAV2OQ
+        isRUsyrRcU/HsWk06r0vpjYEdvBh/Q+9XaPN2IZreQcd7DQ4+PuBRid84plsoolt
+        YBqOh2SHT55j6W8gzEB5LTEAA7cCNPw6Ks7mvtE/EwAYMp9AzM3BS4OnzhGmdD0G
+        tDK9XxYLV7gTOa+JbR2WNSYXJMLbc0qRbFa/6ykCgYEAippg94jSLczNoc974Uxv
+        wDeGf5AqqvYLmKpdrhIv0+egHPyBcT3oNXTU2pyLRbP2iNnMo/GkzCZAtBqn8ctm
+        5TgFRs3wLmtN2QtVmuaKEnluX9ywXb/BcQepONZsWgif/w+A4Y78E8Mm7azOV4SQ
+        0PKbe/xaE6sWvGVXe6Uc+eY=
+      -----END PRIVATE KEY-----
+    snis:
+      - name: localhost
