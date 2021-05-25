@@ -75,3 +75,20 @@ certificates:
       -----END PRIVATE KEY-----
     snis:
       - name: localhost
+
+plugins:
+  - name: jwt
+    service: salary-service
+    config:
+      secret_is_base64: false
+      run_on_preflight: true
+      key_claim_name: email
+
+consumers:
+  - username: user123
+    custom_id: customerId
+
+jwt_secrets:
+  - consumer: user123
+    key: lucianoalvarez1212+12@gmail.com
+    secret: testing
